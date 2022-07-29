@@ -65,18 +65,23 @@ class _QRCodeScanState extends State<QRCodeScan> {
   }
 
   void _onQRViewCreated(QRViewController controller) async {
+         Map<String, dynamic> product = await widget.model
+          .getProduct("-N7kBOA-qAYBPotRE10r"); // get product from database
+      widget.model.toggleQRScanning(false);
+      openDialogue({"id": "-N7kBOA-qAYBPotRE10r", ...product});
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) async {
       setState(() {
         result = scanData;
       });
 
-      if (result != null) {
-        Map<String, dynamic> product = await widget.model
-            .getProduct(result?.code); // get product from database
-        widget.model.toggleQRScanning(false);
-        openDialogue({"id": result?.code, ...product});
-      }
+   
+      // if (result != null) {
+      //   Map<String, dynamic> product = await widget.model
+      //       .getProduct(result?.code); // get product from database
+      //   widget.model.toggleQRScanning(false);
+      //   openDialogue({"id": result?.code, ...product});
+      // }
     });
   }
 

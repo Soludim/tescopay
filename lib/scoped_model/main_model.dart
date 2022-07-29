@@ -12,7 +12,6 @@ class MainScopedModel extends Model {
   bool get isScanning => _isScanning;
   List<Map<String, dynamic>> get cart => _cart;
 
-
   Future getProduct(String? id) async {
     Map<String, dynamic> product = {};
     Uri getProductUri =
@@ -76,15 +75,16 @@ class MainScopedModel extends Model {
     for (int i = 0; i < _cart.length; i++) {
       total = total + _cart[i]["price"] * _cart[i]["quantity"];
     }
-    return total;
+    return double.parse(total.toStringAsFixed(2));
   }
 
-  void addToShopping(List<Map<String, dynamic>> items) async {
+  Future<Map<String, dynamic>> addToShopping() async {
+    Map<String, dynamic> result = {};
     final transactionDetails = {
       "receipt-checked": false,
       "date": DateTime.now().toString(),
-      "items": items,
-      "total": 72
+      "items": _cart,
+      "total": cartPriceTotal()
     };
     _isLoading = true;
     notifyListeners();
@@ -97,10 +97,18 @@ class MainScopedModel extends Model {
     var decodedResponse = json.decode(response.body);
     notifyListeners();
     if (response.statusCode != 200) {
-      print({'success': false, 'message': decodedResponse['message']});
+      result = ({'success': false, 'message': decodedResponse['message']});
     } else {
-      print('success');
+      result = ({
+        'success': true,
+        'shoppingDetails': {
+          "shoppingId": decodedResponse['name'],
+          ...transactionDetails
+        }
+      });
     }
+
+    return result;
   }
 
   void toggleQRScanning(bool scan) {

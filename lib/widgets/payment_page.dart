@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
+import '../scoped_model/main_model.dart';
+import '../widgets/generate_invoice.dart';
 
 class PaymentPage extends StatefulWidget {
-  const PaymentPage({Key? key}) : super(key: key);
+  final MainScopedModel model;
+  const PaymentPage({Key? key, required this.model}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _PaymentPageState();
@@ -23,16 +26,21 @@ class _PaymentPageState extends State<PaymentPage> {
       ..amount = 10000
       ..reference = DateTime.now().toString()
       ..currency = "GHS"
-      ..email = 'isolution455@gmail.com';
+      ..email = "isolution455@gmail.com";
     CheckoutResponse response = await plugin.checkout(
       context,
       method: CheckoutMethod.card, // Defaults to CheckoutMethod.selectable
       charge: charge,
     );
 
-    print(response.message);
-    print(response.status);
-    print(response.card);
+    if (response.status) {
+      var shoppingDetails = await widget.model.addToShopping();
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute<Route>(
+              builder: (context) =>
+                  GenerateInvoice(shoppingDetails: shoppingDetails["shoppingDetails"])));
+    }
   }
 
   @override

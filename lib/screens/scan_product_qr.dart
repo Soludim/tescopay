@@ -22,7 +22,7 @@ class _ScanProductQRState extends State<ScanProductQR> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Image.network(width: 250, "assets/qr_code.png"),
+                Image.asset(width: 250, "assets/qr_code.png"),
                 ElevatedButton(
                   onPressed: () =>
                       setState(() => widget.model.toggleQRScanning(true)),

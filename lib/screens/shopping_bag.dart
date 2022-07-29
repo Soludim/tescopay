@@ -14,6 +14,12 @@ class ShoppingBag extends StatefulWidget {
 
 class _ShoppingBagState extends State<ShoppingBag> {
   @override
+  void initState() {
+    widget.model.toggleQRScanning(false); //turn off scanning
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -43,7 +49,7 @@ class _ShoppingBagState extends State<ShoppingBag> {
               direction: DismissDirection.endToStart,
               onDismissed: (DismissDirection direction) {
                 if (direction == DismissDirection.endToStart) {
-                  setState(()=>widget.model.removeFromCart(index));
+                  setState(() => widget.model.removeFromCart(index));
                 }
               },
               background: Container(color: Colors.red),
@@ -79,7 +85,7 @@ class _ShoppingBagState extends State<ShoppingBag> {
           },
           itemCount: widget.model.cart.length,
         )),
-       widget.model.cart.isEmpty
+        widget.model.cart.isEmpty
             ? const SizedBox()
             : Card(
                 elevation: 2,
@@ -88,8 +94,11 @@ class _ShoppingBagState extends State<ShoppingBag> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(Utils.formatPrice(widget.model.cartPriceTotal())),
-                      const PaymentPage(),
+                      Text(
+                        Utils.formatPrice(widget.model.cartPriceTotal()),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      PaymentPage(model: widget.model),
                     ],
                   ),
                 ),
