@@ -27,9 +27,9 @@ class _ScanProductQRState extends State<ScanProductQR> {
                   onPressed: () =>
                       setState(() => widget.model.toggleQRScanning(true)),
                   style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(10),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
+                        borderRadius: BorderRadius.circular(8.0),
                       )),
                   child: Row(mainAxisSize: MainAxisSize.min, children: const [
                     Icon(Icons.qr_code_scanner_sharp),

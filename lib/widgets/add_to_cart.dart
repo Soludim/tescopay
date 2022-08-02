@@ -40,17 +40,18 @@ class _AddToCartState extends State<AddToCart> {
                 Text(
                   widget.product["name"],
                   style: const TextStyle(
-                      fontSize: 12, color: Color.fromARGB(200, 39, 38, 38)),
+                    fontWeight: FontWeight.bold,
+                      fontSize: 16, color: Color.fromARGB(200, 39, 38, 38)),
                 ),
                 const SizedBox(height: 2),
                 Text(widget.product["description"],
                     style: const TextStyle(
-                        fontSize: 10, color: Color.fromARGB(100, 39, 38, 38))),
+                        fontSize: 11, color: Color.fromARGB(100, 39, 38, 38))),
                 const SizedBox(height: 2),
                 Text(
                   Utils.formatPrice(widget.product["price"]),
                   style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 16),
+                      fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xffEE1C2E)),
                 )
               ],
             )

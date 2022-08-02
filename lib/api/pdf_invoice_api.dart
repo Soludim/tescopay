@@ -104,18 +104,16 @@ class PdfInvoiceApi {
       'Date',
       'Quantity',
       'Unit Price',
-      'VAT',
       'Total'
     ];
     final data = invoice.items.map((item) {
-      final total = item.unitPrice * item.quantity * (1 + item.vat);
+      final total = item.unitPrice * item.quantity;
 
       return [
         item.description,
         Utils.formatDate(item.date),
         '${item.quantity}',
         '\$ ${item.unitPrice}',
-        '${item.vat} %',
         '\$ ${total.toStringAsFixed(2)}',
       ];
     }).toList();
@@ -142,9 +140,7 @@ class PdfInvoiceApi {
     final netTotal = invoice.items
         .map((item) => item.unitPrice * item.quantity)
         .reduce((item1, item2) => item1 + item2);
-    final vatPercent = invoice.items.first.vat;
-    final vat = netTotal * vatPercent;
-    final total = netTotal + vat;
+    final total = netTotal;
 
     return Container(
       alignment: Alignment.centerRight,
@@ -159,11 +155,6 @@ class PdfInvoiceApi {
                 buildText(
                   title: 'Net total',
                   value: Utils.formatPrice(netTotal),
-                  unite: true,
-                ),
-                buildText(
-                  title: 'Vat ${vatPercent * 100} %',
-                  value: Utils.formatPrice(vat),
                   unite: true,
                 ),
                 Divider(),

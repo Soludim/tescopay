@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/payment_page.dart';
+import 'package:tescopay/widgets/razor_payment.dart';
 import '../utils.dart';
 
 import '../scoped_model/main_model.dart';
@@ -56,24 +56,33 @@ class _ShoppingBagState extends State<ShoppingBag> {
               child: Column(
                 children: <Widget>[
                   ListTile(
+                    minVerticalPadding: 14,
                     leading: Image.network(widget.model.cart[index]["image"]),
-                    title: Text(widget.model.cart[index]["name"].length <= 30
-                        ? widget.model.cart[index]["name"]
-                        : widget.model.cart[index]["name"].substring(0, 30) +
-                            '...'),
+                    title: Text(
+                        widget.model.cart[index]["name"].length <= 30
+                            ? widget.model.cart[index]["name"]
+                            : widget.model.cart[index]["name"]
+                                    .substring(0, 30) +
+                                '...',
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      
+                    ),
                     subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
                             widget.model.cart[index]["description"],
-                            style: const TextStyle(fontSize: 10),
+                            style: const TextStyle(fontSize: 13),
                           ),
                           Text(
                             Utils.formatPrice(
                                     widget.model.cart[index]["price"]) +
                                 " x ${widget.model.cart[index]["quantity"]}",
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xffEE1C2E),
+                                fontSize: 13),
                           )
                         ]),
                     trailing: _buildIncDecQty(context, index),
@@ -98,7 +107,7 @@ class _ShoppingBagState extends State<ShoppingBag> {
                         Utils.formatPrice(widget.model.cartPriceTotal()),
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      PaymentPage(model: widget.model),
+                      RazorPay(model: widget.model),
                     ],
                   ),
                 ),

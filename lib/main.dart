@@ -22,7 +22,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             primarySwatch: Utils.buildMaterialColor(const Color(0xffEE1C2E)),
-            primaryColor: const Color(0xff00539F)),
+            primaryColor: const Color(0xff00539F),
+            fontFamily: "Raleway"
+            ),
+            
         routes: <String, WidgetBuilder>{
           '/': (BuildContext context) => const Home(),
           '/shopping-bag': (BuildContext context) => ShoppingBag(model: _model,),
