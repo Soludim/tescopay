@@ -6,17 +6,7 @@ import '../utils.dart';
 class MainScopedModel extends Model {
   bool _isScanning = false;
   bool _isLoading = false;
-  final List<Map<String, dynamic>> _cart = [
-    {
-      "id": "-N7kBOA-qAYBPotRE10r",
-      "description": "Milo sachet 50g",
-      "image":
-          "https://banner2.cleanpng.com/20180611/kqz/kisspng-milo-malted-milk-chocolate-drink-cocoa-solids-5b1e51515ed8b6.1888110015287135533885.jpg",
-      "name": "Chocolate Milk",
-      "price": 12.45,
-      "quantity": 2
-    }
-  ]; //cart items
+  final List<Map<String, dynamic>> _cart = []; //cart items
 
   bool get isLoading => _isLoading;
   bool get isScanning => _isScanning;
