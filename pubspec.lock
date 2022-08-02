@@ -118,6 +118,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  flutter_paystack:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: a4a33c3dd0a12f46d655a2e63d11e9f20ba82d01
+      resolved-ref: a4a33c3dd0a12f46d655a2e63d11e9f20ba82d01
+      url: "https://github.com/definitelyme/flutter_paystack.git"
+    source: git
+    version: "1.0.5+1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -156,6 +165,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.2.0"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.17.0"
   js:
     dependency: transitive
     description:
