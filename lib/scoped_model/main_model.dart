@@ -24,29 +24,29 @@ class MainScopedModel extends Model {
     return product;
   }
 
-  void addProduct(Map<String, dynamic> formData) async {
-    _isLoading = true;
-    notifyListeners();
-    Uri productsUri = Uri.parse('${Utils.databaseEndPoint}/products.json');
+  // void addProduct(Map<String, dynamic> formData) async {
+  //   _isLoading = true;
+  //   notifyListeners();
+  //   Uri productsUri = Uri.parse('${Utils.databaseEndPoint}/products.json');
 
-    http.Response response = await http.post(productsUri,
-        body: json.encode({
-          "name": "Iphone 7",
-          "image":
-              "https://toppng.com/uploads/preview/iphone-7-plus-11563595962ckynm5lfpk.png",
-          "price": 135
-        }),
-        headers: Utils.customHeaders);
+  //   http.Response response = await http.post(productsUri,
+  //       body: json.encode({
+  //         "name": "Iphone 7",
+  //         "image":
+  //             "https://toppng.com/uploads/preview/iphone-7-plus-11563595962ckynm5lfpk.png",
+  //         "price": 135
+  //       }),
+  //       headers: Utils.customHeaders);
 
-    _isLoading = false;
-    var decodedResponse = json.decode(response.body);
-    notifyListeners();
-    if (response.statusCode != 200) {
-      print({'success': false, 'message': decodedResponse['message']});
-    } else {
-      print('success');
-    }
-  }
+  //   _isLoading = false;
+  //   var decodedResponse = json.decode(response.body);
+  //   notifyListeners();
+  //   if (response.statusCode != 200) {
+  //     print({'success': false, 'message': decodedResponse['message']});
+  //   } else {
+  //     print('success');
+  //   }
+  // }
 
   void addToCart(Map<String, dynamic> item) {
     int itemAlreadyInCartIndex =
